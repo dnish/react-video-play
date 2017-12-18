@@ -694,6 +694,7 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 						}}
 						onClick={this.handlerVideoClick}
 						poster={this.props.poster}
+						playsInline
 					/>
 				</div>
 			</div>
