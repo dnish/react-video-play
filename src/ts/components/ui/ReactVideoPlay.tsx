@@ -43,7 +43,8 @@ export interface Props {
 	muted?: boolean,
 	showSourceName?: boolean,
 	ambiLight?: boolean,
-	loaderColor?: string
+	loaderColor?: string,
+    allowQualitySelection: boolean
 }
 
 export interface State {
@@ -95,7 +96,8 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 		autoplay: false,
 		showSourceName: false,
 		ambiLight: false,
-		loaderColor: "#fff"
+		loaderColor: "#fff",
+		allowQualitySelection: false
 	} as Props;
 
 	private player: HTMLVideoElement;
@@ -594,6 +596,8 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 
 	private drawQuality(): JSX.Element {
 		let className = this.state.quality ? "ui-video-player-src " : "ui-video-player-src hide";
+
+		if(!this.props.allowQualitySelection) return null;
 
 		return (
 			<div className={className}>

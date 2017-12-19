@@ -36,6 +36,7 @@ export interface Props {
     showSourceName?: boolean;
     ambiLight?: boolean;
     loaderColor?: string;
+    allowQualitySelection: boolean;
 }
 export interface State {
     containerWidth: number;
