@@ -597,8 +597,6 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 	private drawQuality(): JSX.Element {
 		let className = this.state.quality ? "ui-video-player-src " : "ui-video-player-src hide";
 
-		if(!this.props.allowQualitySelection) return null;
-
 		return (
 			<div className={className}>
 				{
@@ -638,6 +636,7 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 					fullscreenEnable={this.state.fullScreen}
 					showSourceName={this.props.showSourceName}
 					sourceName={this.props.sources[this.state.srcIndex].name}
+					allowQualitySelection={this.props.allowQualitySelection}
 				/>
 			);
 		}

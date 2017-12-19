@@ -24,7 +24,8 @@ export interface Props {
 	handlerFullscreen: () => void,
 	handlerQuality: () => void,
 	showSourceName?: boolean,
-	sourceName?: string
+	sourceName?: string,
+	allowQualitySelection?: boolean
 }
 
 export interface State {
@@ -152,6 +153,9 @@ export class UIVideoControlsComponent extends React.Component<Props, State> {
 	}
 
 	private drawQuality(): JSX.Element {
+
+		if(!this.props.allowQualitySelection) return null;
+
 		if (this.props.showSourceName) {
 			return (
 				<div

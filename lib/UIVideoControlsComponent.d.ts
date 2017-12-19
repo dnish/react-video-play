@@ -17,6 +17,7 @@ export interface Props {
     handlerQuality: () => void;
     showSourceName?: boolean;
     sourceName?: string;
+    allowQualitySelection?: boolean;
 }
 export interface State {
     seekWidth: number;
