@@ -158,6 +158,8 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 
 		window.removeEventListener('keydown', this.handlerKeys);
 		window.removeEventListener('resize', this.handlerWindowResize);
+
+		window.clearInterval(this.interval);
 	}
 
 	private playAmbient(stop?: boolean): void {
@@ -440,7 +442,7 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 	}
 
 	private play(): void {
-		this.player.play();
+		this.player.play().catch(() => null);
 
 		this.setState({
 			adv: false,
