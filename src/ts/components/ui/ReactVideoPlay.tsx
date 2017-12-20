@@ -159,7 +159,6 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 		window.removeEventListener('keydown', this.handlerKeys);
 		window.removeEventListener('resize', this.handlerWindowResize);
 
-		window.clearInterval(this.interval);
 	}
 
 	private playAmbient(stop?: boolean): void {
@@ -255,12 +254,10 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 
 	private events(): void {
 		if (this.player) {
-			this.player.addEventListener('play', () => {
-				this.interval = setInterval(() => {
-					this.setState({
-						currentTime: +this.player.currentTime
-					} as State);
-				}, 100);
+			this.player.addEventListener('timeupdate', () => {
+                this.setState({
+                    currentTime: this.player.currentTime
+                } as State);
 			});
 
 			this.player.addEventListener('loadeddata', () => {
@@ -457,7 +454,6 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 	private pause(adv?): void {
 		this.player.pause();
 
-		clearInterval(this.interval);
 
 		this.setState({
 			paused: true,
