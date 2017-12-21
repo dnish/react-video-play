@@ -256,6 +256,9 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 	private events(): void {
 		if (this.player) {
 			this.player.addEventListener('timeupdate', () => {
+
+				if(!this.player) return;
+
                 this.setState({
                     currentTime: this.player.currentTime
                 } as State);
@@ -447,45 +450,41 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 
 	private play(): void {
 
-		try {
+            this.player.play().then(() => {
 
-            this.player.play();
+                this.setState({
+                    adv: false,
+                    paused: false
+                } as State, () => {
+                    if (mobile()) {
+                        this.controlsHider();
+                    }
+                });
 
-            this.setState({
-                adv: false,
-                paused: false
-            } as State, () => {
-                if (mobile()) {
-                    this.controlsHider();
-                }
-            });
+			}).catch(() => null);
 
-		}
-		catch(e) {
 
-		}
+
 	}
 
 	private pause(adv?): void {
 
-		try {
-            this.player.pause();
+            this.player.pause().then(() => {
 
-
-            this.setState({
-                paused: true,
-                hideControls: false
-            } as State);
-
-            if (adv) {
                 this.setState({
-                    adv: true,
+                    paused: true,
+                    hideControls: false
                 } as State);
-            }
-		}
-		catch(e) {
 
-		}
+                if (adv) {
+                    this.setState({
+                        adv: true,
+                    } as State);
+                }
+
+			}).catch(() => null);
+
+
 	}
 
 	private handlerVideoClick = (): void => {
