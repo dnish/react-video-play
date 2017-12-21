@@ -262,6 +262,9 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 			});
 
 			this.player.addEventListener('loadeddata', () => {
+
+				if(!this.player) return;
+
 				this.setState({
 					duration: this.player.duration,
 					loading: false
@@ -443,31 +446,45 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 	}
 
 	private play(): void {
-		this.player.play().catch(() => null);
 
-		this.setState({
-			adv: false,
-			paused: false
-		} as State, () => {
-			if (mobile()) {
-				this.controlsHider();
-			}
-		});
+		try {
+
+            this.player.play();
+
+            this.setState({
+                adv: false,
+                paused: false
+            } as State, () => {
+                if (mobile()) {
+                    this.controlsHider();
+                }
+            });
+
+		}
+		catch(e) {
+
+		}
 	}
 
 	private pause(adv?): void {
-		this.player.pause();
+
+		try {
+            this.player.pause();
 
 
-		this.setState({
-			paused: true,
-			hideControls: false
-		} as State)
+            this.setState({
+                paused: true,
+                hideControls: false
+            } as State);
 
-		if (adv) {
-			this.setState({
-				adv: true,
-			} as State);
+            if (adv) {
+                this.setState({
+                    adv: true,
+                } as State);
+            }
+		}
+		catch(e) {
+
 		}
 	}
 
