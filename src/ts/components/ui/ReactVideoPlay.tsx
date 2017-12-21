@@ -45,6 +45,7 @@ export interface Props {
 	ambiLight?: boolean,
 	loaderColor?: string,
     allowQualitySelection: boolean
+	disableHoverHandling: boolean
 }
 
 export interface State {
@@ -118,8 +119,8 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 		this.handlerWindowResize();
 
 		if (this.playerContainer) {
-			this.playerContainer.addEventListener('mouseenter', this.handlerMouseEnter);
-			this.playerContainer.addEventListener('mouseleave', this.handlerMouseLeave);
+			if(!this.props.disableHoverHandling) this.playerContainer.addEventListener('mouseenter', this.handlerMouseEnter);
+            if(!this.props.disableHoverHandling) this.playerContainer.addEventListener('mouseleave', this.handlerMouseLeave);
 			this.playerContainer.addEventListener("webkitfullscreenchange", this.onFullscreenChange);
 			this.playerContainer.addEventListener("mozfullscreenchange", this.onFullscreenChange);
 			this.playerContainer.addEventListener("fullscreenchange", this.onFullscreenChange);
@@ -148,8 +149,8 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 	}
 
 	componentWillUnmount() {
-		this.playerContainer.removeEventListener('mouseenter', this.handlerMouseEnter);
-		this.playerContainer.removeEventListener('mouseleave', this.handlerMouseLeave);
+        if(!this.props.disableHoverHandling) this.playerContainer.removeEventListener('mouseenter', this.handlerMouseEnter);
+        if(!this.props.disableHoverHandling) this.playerContainer.removeEventListener('mouseleave', this.handlerMouseLeave);
 		this.playerContainer.removeEventListener("webkitfullscreenchange", this.onFullscreenChange);
 		this.playerContainer.removeEventListener("mozfullscreenchange", this.onFullscreenChange);
 		this.playerContainer.removeEventListener("fullscreenchange", this.onFullscreenChange);

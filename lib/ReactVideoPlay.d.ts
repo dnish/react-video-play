@@ -37,6 +37,7 @@ export interface Props {
     ambiLight?: boolean;
     loaderColor?: string;
     allowQualitySelection: boolean;
+    disableHoverHandling: boolean;
 }
 export interface State {
     containerWidth: number;
