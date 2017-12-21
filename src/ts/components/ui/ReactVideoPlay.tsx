@@ -292,6 +292,9 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 			});
 
 			this.player.addEventListener("progress", () => {
+
+				if(!this.player) return;
+
 				let currentTime: number = this.player.currentTime;
 				let buffer: TimeRanges = this.player.buffered;
 
