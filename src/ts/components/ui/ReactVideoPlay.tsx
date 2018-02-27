@@ -469,7 +469,7 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 
     private pause(adv?): void {
 
-        this.player.pause();
+        if(this && this.player) this.player.pause();
 
         this.setState({
             paused: true,
